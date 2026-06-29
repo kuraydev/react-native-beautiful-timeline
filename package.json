@@ -1,6 +1,6 @@
 {
   "name": "react-native-beautiful-timeline",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Fully customizable, beautifully designed Timeline for React Native.",
   "keywords": [
     "react-native",
@@ -107,6 +107,7 @@
   "react-native-builder-bob": {
     "source": "lib",
     "output": "dist",
+    "esm": true,
     "targets": [
       [
         "commonjs"
