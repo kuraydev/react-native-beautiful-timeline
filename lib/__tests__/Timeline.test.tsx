@@ -53,8 +53,12 @@ describe("Timeline", () => {
 
   it("renders one day label per group using the default day format", () => {
     const { getAllByText } = render(<Timeline data={sampleData} />);
-    expect(getAllByText(moment(sampleData[0].date).format("DD")).length).toBe(1);
-    expect(getAllByText(moment(sampleData[1].date).format("DD")).length).toBe(1);
+    expect(getAllByText(moment(sampleData[0].date).format("DD")).length).toBe(
+      1,
+    );
+    expect(getAllByText(moment(sampleData[1].date).format("DD")).length).toBe(
+      1,
+    );
   });
 
   it("formats the card date with the default dateFormat token", () => {
@@ -73,7 +77,10 @@ describe("Timeline", () => {
 
   it("forwards titleTextStyle down to the cards", () => {
     const { getByText } = render(
-      <Timeline data={sampleData} titleTextStyle={{ color: "rgb(255, 0, 0)" }} />,
+      <Timeline
+        data={sampleData}
+        titleTextStyle={{ color: "rgb(255, 0, 0)" }}
+      />,
     );
     const node = getByText("Timeline");
     const flattened = Array.isArray(node.props.style)

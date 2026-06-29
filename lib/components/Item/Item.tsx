@@ -1,10 +1,5 @@
 import React, { useMemo } from "react";
-import {
-  View,
-  StyleProp,
-  ViewStyle,
-  useWindowDimensions,
-} from "react-native";
+import { View, StyleProp, ViewStyle, useWindowDimensions } from "react-native";
 import Card from "../Card/Card";
 import PointLine from "../PointLine/PointLine";
 import { ITimeline, ITimelineData } from "../../models";

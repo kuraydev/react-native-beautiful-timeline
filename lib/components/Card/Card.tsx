@@ -40,10 +40,16 @@ const Card: React.FC<CardProps> = ({
         accessible
         accessibilityRole="text"
         accessibilityLabel={`${title}. ${subtitle}`}
-        style={[styles.cardContainer, isCard && styles.cardContainerShadowStyle]}
+        style={[
+          styles.cardContainer,
+          isCard && styles.cardContainerShadowStyle,
+        ]}
       >
         <View style={styles.cardContainerGlue}>
-          <Text numberOfLines={1} style={[styles.titleTextStyle, titleTextStyle]}>
+          <Text
+            numberOfLines={1}
+            style={[styles.titleTextStyle, titleTextStyle]}
+          >
             {title}
           </Text>
           <Text
@@ -56,7 +62,11 @@ const Card: React.FC<CardProps> = ({
       </View>
       <Text
         numberOfLines={1}
-        style={[styles.dateTextStyle, isCard && { marginTop: 8 }, dateTextStyle]}
+        style={[
+          styles.dateTextStyle,
+          isCard && { marginTop: 8 },
+          dateTextStyle,
+        ]}
       >
         {moment(date).format(dateFormat)}
       </Text>

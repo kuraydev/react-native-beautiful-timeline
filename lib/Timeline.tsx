@@ -54,7 +54,11 @@ const keyForGroup = (item: ITimeline, index: number): string => {
   return `${item.date}-${firstTitle}-${index}`;
 };
 
-const Timeline: React.FC<TimelineProps> = ({ data, timelineStyle, ...rest }) => {
+const Timeline: React.FC<TimelineProps> = ({
+  data,
+  timelineStyle,
+  ...rest
+}) => {
   const { width } = useWindowDimensions();
   const styles = useMemo(() => createTimelineStyles(width), [width]);
 
