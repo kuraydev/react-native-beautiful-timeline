@@ -107,13 +107,15 @@
   "react-native-builder-bob": {
     "source": "lib",
     "output": "dist",
-    "esm": true,
     "targets": [
       [
         "commonjs"
       ],
       [
-        "module"
+        "module",
+        {
+          "esm": true
+        }
       ],
       [
         "typescript"
