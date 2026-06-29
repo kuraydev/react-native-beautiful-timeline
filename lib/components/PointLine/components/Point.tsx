@@ -9,10 +9,15 @@ interface PointProps {
 
 const Point: React.FC<PointProps> = ({ innerContainer, outerContainer }) => {
   return (
-    <View style={[styles.innerContainer, styles.shadowStyle, innerContainer]}>
+    <View
+      accessible={false}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants"
+      style={[styles.innerContainer, styles.shadowStyle, innerContainer]}
+    >
       <View style={[styles.outerContainer, outerContainer]} />
     </View>
   );
 };
 
-export default Point;
+export default React.memo(Point);

@@ -1,12 +1,11 @@
 import * as React from "react";
 import { View, Text, StyleProp, ViewStyle, TextStyle } from "react-native";
 import moment from "moment";
-import Androw from "react-native-androw";
 /**
  * ? Local Imports
  */
 import styles from "./Card.style";
-import { ITimelineData } from "lib/models";
+import { ITimelineData } from "../../models";
 
 interface CardProps {
   data: ITimelineData;
@@ -28,7 +27,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { title, subtitle, date } = data;
   return (
-    <Androw
+    <View
       style={[
         styles.container,
         styles.shadowStyle,
@@ -37,17 +36,14 @@ const Card: React.FC<CardProps> = ({
         },
       ]}
     >
-      <Androw
-        style={[
-          styles.cardContainer,
-          isCard && styles.cardContainerShadowStyle,
-        ]}
+      <View
+        accessible
+        accessibilityRole="text"
+        accessibilityLabel={`${title}. ${subtitle}`}
+        style={[styles.cardContainer, isCard && styles.cardContainerShadowStyle]}
       >
         <View style={styles.cardContainerGlue}>
-          <Text
-            numberOfLines={1}
-            style={[styles.titleTextStyle, titleTextStyle]}
-          >
+          <Text numberOfLines={1} style={[styles.titleTextStyle, titleTextStyle]}>
             {title}
           </Text>
           <Text
@@ -57,19 +53,15 @@ const Card: React.FC<CardProps> = ({
             {subtitle}
           </Text>
         </View>
-      </Androw>
+      </View>
       <Text
         numberOfLines={1}
-        style={[
-          styles.dateTextStyle,
-          isCard && { marginTop: 8 },
-          dateTextStyle,
-        ]}
+        style={[styles.dateTextStyle, isCard && { marginTop: 8 }, dateTextStyle]}
       >
         {moment(date).format(dateFormat)}
       </Text>
-    </Androw>
+    </View>
   );
 };
 
-export default Card;
+export default React.memo(Card);
