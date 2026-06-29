@@ -1,13 +1,4 @@
-import {
-  ViewStyle,
-  StyleSheet,
-  Insets,
-  Dimensions,
-  Platform,
-} from "react-native";
-
-const { width: ScreenWidth, height: ScreenHeight } = Dimensions.get("screen");
-const isAndroid = Platform.OS === "android";
+import { ViewStyle, StyleSheet, Insets } from "react-native";
 
 interface Style {
   container: ViewStyle;
@@ -16,22 +7,31 @@ interface Style {
   contentInset: Insets;
 }
 
-export default StyleSheet.create<Style>({
-  container: {
-    marginLeft: 16,
-    marginRight: 16,
-    height: ScreenHeight,
-    backgroundColor: "#fdfdfd",
-  },
-  listStyle: {
-    paddingTop: 16,
-    width: ScreenWidth,
-    maxHeight: isAndroid ? ScreenHeight / 2 - 32 : ScreenHeight,
-  },
-  contentContainerStyle: {
-    alignItems: "center",
-  },
-  contentInset: {
-    bottom: ScreenHeight * 0.3,
-  },
-});
+/**
+ * Styles are built from the live window dimensions (via `useWindowDimensions`)
+ * so the timeline reflows on rotation / split-view instead of capturing the
+ * screen size once at module load.
+ */
+export const createTimelineStyles = (width: number) =>
+  StyleSheet.create<Style>({
+    container: {
+      marginLeft: 16,
+      marginRight: 16,
+      flex: 1,
+      backgroundColor: "#fdfdfd",
+    },
+    listStyle: {
+      flex: 1,
+      paddingTop: 16,
+      width,
+    },
+    contentContainerStyle: {
+      alignItems: "center",
+      paddingBottom: 24,
+    },
+    contentInset: {
+      bottom: 24,
+    },
+  });
+
+export default createTimelineStyles;

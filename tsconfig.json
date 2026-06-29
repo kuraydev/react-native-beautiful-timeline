@@ -11,7 +11,6 @@
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./",
-    "outDir": "build/dist",
     "noEmitHelpers": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
@@ -28,10 +27,13 @@
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "sourceMap": true /* Generates corresponding '.map' file. */
   },
+  "include": ["lib"],
   "exclude": [
     "example",
     "example-manual-state",
     "node_modules",
+    "dist",
+    "build",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"

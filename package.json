@@ -1,61 +1,125 @@
 {
   "name": "react-native-beautiful-timeline",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Fully customizable, beautifully designed Timeline for React Native.",
   "keywords": [
+    "react-native",
+    "react native timeline",
     "timeline",
     "beautiful",
-    "dynamic",
     "customizable",
-    "FreakyCoder",
-    "freakycoder",
-    "kuray",
-    "Kuray",
-    "react",
-    "react-native",
-    "javascript",
+    "ios",
+    "android",
     "ui-lib",
     "rn"
   ],
-  "homepage": "https://www.freakycoder.com",
-  "bugs": "https://github.com/WrathChaos/react-native-beautiful-timeline/issues",
-  "main": "./build/dist/Timeline.js",
-  "repository": "git@github.com:WrathChaos/react-native-beautiful-timeline.git",
+  "homepage": "https://github.com/kuraydev/react-native-beautiful-timeline#readme",
+  "bugs": {
+    "url": "https://github.com/kuraydev/react-native-beautiful-timeline/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuraydev/react-native-beautiful-timeline.git"
+  },
+  "main": "dist/commonjs/index.js",
+  "module": "dist/module/index.js",
+  "types": "dist/typescript/index.d.ts",
+  "react-native": "dist/module/index.js",
+  "source": "lib/index",
+  "exports": {
+    ".": {
+      "types": "./dist/typescript/index.d.ts",
+      "react-native": "./dist/module/index.js",
+      "import": "./dist/module/index.js",
+      "require": "./dist/commonjs/index.js",
+      "default": "./dist/commonjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "dist",
+    "!**/__tests__",
+    "!**/*.test.ts",
+    "!**/*.test.tsx",
+    "!**/*.tsbuildinfo"
+  ],
   "author": "Kuray (FreakyCoder) <kurayogun@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "moment": ">= 2.24.0",
-    "react-native-dash-2": ">= 0.2.3",
-    "react-native-androw": ">= 0.0.34",
-    "@freakycoder/react-native-helpers": ">= 0.1.0"
+    "moment": ">=2.24.0",
+    "react-native-dash-2": ">=0.2.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-native": ">=0.61.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-native": {
+      "optional": false
+    }
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.1",
-    "@commitlint/config-conventional": "^15.0.0",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-native": "^0.63.25",
-    "eslint": "^7.11.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.2.1",
-    "npm-post-install": "0.0.2",
-    "prettier": "^2.1.2",
-    "prettier-format": "^3.0.3",
-    "react-native-typescript-transformer": "^1.2.13",
-    "typescript": "^4.0.3"
+    "@babel/core": "^7.25.0",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.9.0",
+    "@react-native/babel-preset": "0.74.87",
+    "@testing-library/react-native": "^12.5.2",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.3.3",
+    "@types/react-test-renderer": "^18.3.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.9",
+    "prettier": "^3.3.3",
+    "react": "18.3.1",
+    "react-native": "0.74.5",
+    "react-native-builder-bob": "^0.30.0",
+    "react-test-renderer": "18.3.1",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.2.0"
   },
   "scripts": {
-    "build": "cd lib && tsc && cp ../package.json ../build/dist/ && Echo Build completed!",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags",
-    "prettier": "cd lib && npx prettier --write . && git add .",
-    "prepare": "husky install",
-    "husky:setup": "npx husky-init && npm run husky:commitlint && npm run husky:prettier && npm run husky:lint",
-    "husky:commitlint": "npx husky add .husky/commit-msg 'npx --no-install commitlint --edit'",
-    "husky:prettier": "npx husky set .husky/pre-commit 'npm run prettier'",
-    "husky:lint": "npx husky add .husky/pre-commit 'npm run lint'"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write \"lib/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"lib/**/*.{ts,tsx}\"",
+    "test": "jest",
+    "clean": "rm -rf dist build",
+    "build": "bob build",
+    "prepare": "bob build"
+  },
+  "lint-staged": {
+    "lib/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "react-native-builder-bob": {
+    "source": "lib",
+    "output": "dist",
+    "targets": [
+      [
+        "commonjs"
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript"
+      ]
+    ]
   }
 }

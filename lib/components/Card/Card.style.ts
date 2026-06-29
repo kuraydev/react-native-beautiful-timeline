@@ -70,5 +70,6 @@ export default StyleSheet.create<Style>({
       width: 0,
       height: 3,
     },
+    elevation: 3,
   },
 });

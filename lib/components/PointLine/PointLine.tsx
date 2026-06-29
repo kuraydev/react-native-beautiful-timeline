@@ -51,4 +51,4 @@ const PointLine: React.FC<PointLineProps> = ({
   );
 };
 
-export default PointLine;
+export default React.memo(PointLine);

@@ -1,12 +1,12 @@
-import React from "react";
-import { View, StyleProp, FlatList, ViewStyle } from "react-native";
+import React, { useMemo } from "react";
+import { View, StyleProp, ViewStyle, useWindowDimensions } from "react-native";
 import Card from "../Card/Card";
 import PointLine from "../PointLine/PointLine";
 import { ITimeline, ITimelineData } from "../../models";
 /**
  * ? Local Imports
  */
-import styles from "./Item.style";
+import { createItemStyles } from "./Item.style";
 
 interface ItemProps {
   style?: StyleProp<ViewStyle>;
@@ -22,9 +22,8 @@ const Item: React.FC<ItemProps> = ({
   isLastMember,
   ...rest
 }) => {
-  const renderItem = (item: ITimelineData, index: number) => {
-    return <Card {...rest} key={index} isCard data={item} />;
-  };
+  const { width } = useWindowDimensions();
+  const styles = useMemo(() => createItemStyles(width), [width]);
 
   return (
     <View style={[styles.container, style]}>
@@ -35,14 +34,17 @@ const Item: React.FC<ItemProps> = ({
         isLastMember={isLastMember}
       />
       <View style={styles.insideListContainer}>
-        <FlatList
-          data={list}
-          renderItem={({ item, index }) => renderItem(item, index)}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        {list.map((item, index) => (
+          <Card
+            {...rest}
+            key={`${item.date}-${item.title}-${index}`}
+            isCard
+            data={item}
+          />
+        ))}
       </View>
     </View>
   );
 };
 
-export default Item;
+export default React.memo(Item);
